@@ -1,1 +1,1 @@
-export { TQueryParams } from './query-params.type';
+export type { TQueryParams } from './query-params.type';

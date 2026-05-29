@@ -16,7 +16,7 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@ui-kit/*": ["src/app/ui-kit/*/index.ts"],
+      "@ui-kit/*": ["src/app/shared/ui-kit/*/index.ts"],
       "@features/*": ["src/app/features/*/index.ts"],
       "@core": ["src/app/core/index.ts"],
       "@api/base": ["src/app/api/base/index.ts"],

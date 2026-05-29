@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+.cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.cdk-overlay-container {
+  z-index: 1000;
+}

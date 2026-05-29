@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.users-list-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__toolbar {
+    margin-bottom: 24px;
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 360px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+
+    &:focus {
+      border-color: #4f46e5;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  &__state {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    padding: 48px 0;
+  }
+}
