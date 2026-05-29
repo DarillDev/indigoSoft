@@ -1,0 +1,18 @@
+import { inject, Injectable } from '@angular/core';
+import { UsersApiService } from '../users-api/users-api.service';
+import { IUser } from '@shared';
+import { map, Observable } from 'rxjs';
+import { UserMapper } from '../../mappers/user-mapper/user.mapper';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UsersService {
+  private readonly usersApiService = inject(UsersApiService);
+
+  public getAllUsers(): Observable<IUser[]> {
+    return this.usersApiService
+      .getAllUsers()
+      .pipe(map((usersDto) => usersDto.map(UserMapper.fromDto)));
+  }
+}

@@ -18,7 +18,12 @@
     "paths": {
       "@ui-kit/*": ["src/app/ui-kit/*/index.ts"],
       "@features/*": ["src/app/features/*/index.ts"],
-      "@core": ["src/app/core/index.ts"]
+      "@core": ["src/app/core/index.ts"],
+      "@api/base": ["src/app/api/base/index.ts"],
+      "@api/config": ["src/app/api/config/index.ts"],
+      "@api/types": ["src/app/api/types/index.ts"],
+      "@api/controllers/*": ["src/app/api/controllers/*/index.ts"],
+      "@shared": ["src/app/shared/index.ts"]
     }
   },
   "angularCompilerOptions": {
