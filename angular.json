@@ -67,7 +67,8 @@
               "buildTarget": "indigosoft:build:production"
             },
             "development": {
-              "buildTarget": "indigosoft:build:development"
+              "buildTarget": "indigosoft:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

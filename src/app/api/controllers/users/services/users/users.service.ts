@@ -15,4 +15,10 @@ export class UsersService {
       .getAllUsers()
       .pipe(map((usersDto) => usersDto.map(UserMapper.fromDto)));
   }
+
+  public updateUser(user: IUser): Observable<IUser> {
+    const { id, email, name, role } = user;
+
+    return this.usersApiService.updateUser(id, { email, name, role }).pipe(map(UserMapper.fromDto));
+  }
 }

@@ -1,29 +1,21 @@
 <ui-kit-modal-container title="Edit User">
   <form class="edit-user-dialog" [formGroup]="form" (ngSubmit)="submit()">
-    <div class="edit-user-dialog__field">
-      <label class="edit-user-dialog__label" for="name">Name</label>
+    <ui-kit-input label="Name" placeholder="Enter name" formControlName="name" />
 
-      <input class="edit-user-dialog__input" id="name" type="text" formControlName="name" />
+    @if (form.controls.name.invalid && form.controls.name.touched) {
+      <span class="edit-user-dialog__error">Name is required</span>
+    }
 
-      @if (form.controls.name.invalid && form.controls.name.touched) {
-        <span class="edit-user-dialog__error">Name is required</span>
-      }
-    </div>
+    <ui-kit-input label="Email" placeholder="Enter email" type="email" formControlName="email" />
 
-    <div class="edit-user-dialog__field">
-      <label class="edit-user-dialog__label" for="email">Email</label>
+    @if (form.controls.email.invalid && form.controls.email.touched) {
+      <span class="edit-user-dialog__error">Valid email is required</span>
+    }
 
-      <input class="edit-user-dialog__input" id="email" type="email" formControlName="email" />
-
-      @if (form.controls.email.invalid && form.controls.email.touched) {
-        <span class="edit-user-dialog__error">Valid email is required</span>
-      }
-    </div>
+    <ui-kit-select label="Role" [options]="roleOptions" formControlName="role" />
 
     <div class="edit-user-dialog__actions">
-      <button class="edit-user-dialog__btn edit-user-dialog__btn--submit" type="submit">
-        Save
-      </button>
+      <button class="edit-user-dialog__btn" type="submit">Save</button>
     </div>
   </form>
 </ui-kit-modal-container>

@@ -17,7 +17,7 @@
   } @else {
     <div class="users-list-page__list">
       @for (user of filteredUsers(); track user.id) {
-        <feature-user-card [user]="user" (onEditButtonClick)="openEditDialog(user)" />
+        <feature-user-card [user]="user" (onEditButtonClick)="editUser(user)" />
       }
     </div>
   }
