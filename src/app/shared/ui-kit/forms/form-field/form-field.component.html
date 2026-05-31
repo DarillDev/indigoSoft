@@ -1,0 +1,15 @@
+<ng-content select="ui-kit-label, [uiKitLabel]" />
+
+<div
+  class="ff-wrapper"
+  [class.ff-wrapper--focused]="focused()"
+  [class.ff-wrapper--invalid]="invalid()"
+  [class.ff-wrapper--disabled]="disabled()"
+>
+  <ng-content select="ui-kit-prefix, [uiKitPrefix]" />
+  <ng-content />
+  <ng-content select="ui-kit-suffix, [uiKitSuffix]" />
+</div>
+
+<ng-content select="ui-kit-hint, [uiKitHint]" />
+<ng-content select="ui-kit-error, [uiKitError]" />
