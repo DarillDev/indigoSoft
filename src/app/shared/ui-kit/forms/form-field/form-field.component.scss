@@ -1,0 +1,83 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.ff-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+
+  &--focused {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  }
+
+  &--invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+
+  &--disabled {
+    background: #f9fafb;
+    border-color: #e5e7eb;
+    cursor: not-allowed;
+  }
+}
+
+:host.ff--auto {
+  padding-top: 10px;
+
+  ::ng-deep ui-kit-label,
+  ::ng-deep [uiKitLabel] {
+    position: absolute;
+    top: calc(10px + 21px);
+    left: 13px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 400;
+    color: #9ca3af;
+    pointer-events: none;
+    line-height: 1;
+    background: transparent;
+    transition: top 0.15s ease, transform 0.15s ease, color 0.15s ease;
+  }
+
+  &.ff--float-active {
+    ::ng-deep ui-kit-label,
+    ::ng-deep [uiKitLabel] {
+      top: 0;
+      transform: translateY(-50%) scale(0.85);
+      transform-origin: left center;
+      color: #4f46e5;
+      background: #fff;
+      padding: 0 3px;
+    }
+  }
+}
+
+::ng-deep ui-kit-label,
+::ng-deep [uiKitLabel] {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+::ng-deep ui-kit-hint,
+::ng-deep [uiKitHint] {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+::ng-deep ui-kit-error,
+::ng-deep [uiKitError] {
+  font-size: 12px;
+  color: #ef4444;
+  font-weight: 500;
+}
