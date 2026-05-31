@@ -1,21 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { FORM_FIELD_TOKEN, FormFieldApi, IFormField } from './form-field.token';
+import { ChangeDetectionStrategy, Component, computed, contentChild, input } from '@angular/core';
+import { FORM_FIELD_CONTROL_TOKEN } from './form-field.token';
 
 @Component({
   selector: 'ui-kit-form-field',
   templateUrl: './form-field.component.html',
   styleUrl: './form-field.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: FORM_FIELD_TOKEN, useExisting: FormFieldComponent }],
   host: {
     '[class.ff--auto]':         'floatLabel() === "auto"',
     '[class.ff--float-active]': 'floatActive()',
   },
 })
-export class FormFieldComponent implements FormFieldApi {
+export class FormFieldComponent {
   readonly floatLabel = input<'always' | 'auto'>('always');
 
-  private readonly control = signal<IFormField | null>(null);
+  private readonly control = contentChild(FORM_FIELD_CONTROL_TOKEN);
 
   protected readonly focused  = computed(() => this.control()?.focused()  ?? false);
   protected readonly disabled = computed(() => this.control()?.disabled() ?? false);
@@ -25,7 +24,4 @@ export class FormFieldComponent implements FormFieldApi {
   protected readonly floatActive = computed(
     () => this.floatLabel() === 'auto' && (!this.empty() || this.focused()),
   );
-
-  registerControl(control: IFormField): void   { this.control.set(control); }
-  unregisterControl():                  void   { this.control.set(null);    }
 }

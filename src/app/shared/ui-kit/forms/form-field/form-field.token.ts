@@ -7,9 +7,4 @@ export interface IFormField {
   empty:    Signal<boolean>;
 }
 
-export interface FormFieldApi {
-  registerControl(control: IFormField): void;
-  unregisterControl(): void;
-}
-
-export const FORM_FIELD_TOKEN = new InjectionToken<FormFieldApi>('FORM_FIELD_TOKEN');
+export const FORM_FIELD_CONTROL_TOKEN = new InjectionToken<IFormField>('FORM_FIELD_CONTROL_TOKEN');

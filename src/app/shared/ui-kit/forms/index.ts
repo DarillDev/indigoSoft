@@ -3,8 +3,8 @@ export { SelectComponent } from './select/select.component';
 export type { SelectOption } from './select/select.component';
 
 export { FormFieldComponent } from './form-field/form-field.component';
-export { FORM_FIELD_TOKEN } from './form-field/form-field.token';
-export type { IFormField, FormFieldApi } from './form-field/form-field.token';
+export { FORM_FIELD_CONTROL_TOKEN } from './form-field/form-field.token';
+export type { IFormField } from './form-field/form-field.token';
 
 export { UiKitInputDirective } from './inputs/directives/ui-kit-input.directive';
 
