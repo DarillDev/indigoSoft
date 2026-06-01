@@ -1,23 +1,19 @@
-import { Component, computed, contentChild, contentChildren, effect, input } from '@angular/core';
+import { Component, computed, contentChild, contentChildren, effect } from '@angular/core';
 import { ErrorDirective } from './directives/error/error.directive';
 import { HintDirective } from './directives/hint/hint.directive';
 import { PrefixDirective } from './directives/prefix/prefix.directive';
 import { SuffixDirective } from './directives/suffix/suffix.directive';
 import { FORM_FIELD_CONTROL } from './config/form-field-control.token';
+import { FORM_FIELD } from './config/form-field.token';
 
 @Component({
   selector: 'ui-kit-form-field',
   templateUrl: './form-field.component.html',
   styleUrl: './form-field.component.scss',
   exportAs: 'formField',
-  host: {
-    '[class.ui-kit-form-field--auto]': 'floatLabel() === "auto"',
-    '[class.ui-kit-form-field--float-active]': 'isFloatActive()',
-  },
+  providers: [{ provide: FORM_FIELD, useExisting: FormFieldComponent }],
 })
 export class FormFieldComponent {
-  public readonly floatLabel = input<'always' | 'auto'>('always');
-
   private readonly formField = contentChild(FORM_FIELD_CONTROL);
   private readonly errors = contentChildren(ErrorDirective);
   private readonly hints = contentChildren(HintDirective);
@@ -26,18 +22,10 @@ export class FormFieldComponent {
   private readonly suffix = contentChild(SuffixDirective);
 
   protected readonly isDisabled = computed(() => this.formField()?.isDisabled() ?? false);
-  protected readonly isEmpty = computed(() => this.formField()?.isEmpty() ?? true);
   protected readonly hasPrefix = computed(() => !!this.prefix());
   protected readonly hasSuffix = computed(() => !!this.suffix());
   protected readonly hasHint = computed(() => this.hints().length > 0);
   protected readonly hasError = computed(() => this.errors().length > 0);
-
-  protected readonly isFloatActive = computed(() => {
-    const isAlwaysFloatLabel = this.floatLabel() === 'always';
-    const isNotEmpty = this.isEmpty();
-
-    return isAlwaysFloatLabel || isNotEmpty;
-  });
 
   constructor() {
     effect(() => {
@@ -49,9 +37,7 @@ export class FormFieldComponent {
         return;
       }
 
-      const ids = [...hintsIds, ...errorsIds];
-
-      control.setDescribedByIds(ids);
+      control.setDescribedByIds([...hintsIds, ...errorsIds]);
     });
   }
 

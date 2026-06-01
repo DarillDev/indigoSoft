@@ -11,13 +11,13 @@
   flex: 1;
   min-height: 0;
 
+  &_row {
+    margin-bottom: 10px;
+  }
+
   &_scroll-container {
     flex: 1;
     min-height: 0;
-  }
-
-  &_item {
-    margin-bottom: 10px;
   }
 
   &_placeholder {

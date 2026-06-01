@@ -7,16 +7,20 @@
     <div class="users-list_placeholder">Нет данных</div>
   } @else {
     <cdk-virtual-scroll-viewport [itemSize]="itemSizeInPx()" class="users-list_scroll-container">
-      <div *cdkVirtualFor="let user of users()" class="users-list_item">
-        <ng-container
-          *ngTemplateOutlet="itemTemplate() ?? defaultTemplate; context: { $implicit: user }"
-        />
+      <div *cdkVirtualFor="let user of users(); trackBy: trackById" class="users-list_row">
+        <div class="user-list_row">
+          <ng-container
+            *ngTemplateOutlet="itemTemplate() ?? defaultTemplate; context: { $implicit: user }"
+          />
+        </div>
       </div>
     </cdk-virtual-scroll-viewport>
   }
 </div>
 
 <ng-template #defaultTemplate let-user>
-  <p>{{ user.name }}</p>
-  <p>{{ user.email }}</p>
+  <ds-card>
+    <p>{{ user.name }}</p>
+    <p>{{ user.email }}</p>
+  </ds-card>
 </ng-template>
