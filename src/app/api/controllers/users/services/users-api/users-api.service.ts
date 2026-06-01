@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@api/base';
 import { IUserDto } from '../../dtos/user-dto.interface';
-import { TUpdateUserParams } from '../../dtos/update-ueser-dto.type';
+import { TUpdateUserParams } from '../../dtos/update-user-dto.type';
 
 @Injectable({
   providedIn: 'root',

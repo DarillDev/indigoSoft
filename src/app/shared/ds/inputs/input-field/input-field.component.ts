@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { FormFieldComponent, HintDirective, ErrorDirective } from '@shared/ui-kit/form-field';
 import { InputDirective } from '@shared/ui-kit/input';
 import { ControlErrorTextPipe } from '@shared/ui-pipes/control-error-text';
@@ -10,6 +10,7 @@ let uiKitInputFieldNextId = 0;
   selector: 'ds-input-field',
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormFieldComponent,
     InputDirective,

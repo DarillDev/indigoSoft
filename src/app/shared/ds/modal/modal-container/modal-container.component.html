@@ -2,14 +2,7 @@
   <div class="modal-container__header">
     <h2 class="modal-container__title">{{ title() }}</h2>
     <button class="modal-container__close" type="button" (click)="close()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M12 4L4 12M4 4l8 8"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-      </svg>
+      <ds-icon name="close" [size]="16" />
     </button>
   </div>
 

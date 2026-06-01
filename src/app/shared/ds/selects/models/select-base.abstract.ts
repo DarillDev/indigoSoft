@@ -1,6 +1,6 @@
 import { Directive, input, TemplateRef } from '@angular/core';
 import { IDsSelectOption } from '../interfaces/select-option.interface';
-import { AControlValueAccessor } from 'src/app/shared/models/control-value-accessor.abstract';
+import { AControlValueAccessor } from '@shared/models';
 import { TNillable } from '@shared/models';
 import { IDsSelectOptionContext } from '../interfaces/select-option-context.interface';
 

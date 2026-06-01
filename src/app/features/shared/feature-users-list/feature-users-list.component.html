@@ -17,8 +17,6 @@
 </div>
 
 <ng-template #defaultTemplate let-user>
-  @let userData = asUser(user);
-
-  <p>{{ userData.name }}</p>
-  <p>{{ userData.email }}</p>
+  <p>{{ user.name }}</p>
+  <p>{{ user.email }}</p>
 </ng-template>

@@ -24,6 +24,6 @@ export interface IUserDto {
   };
 
   // Эти поля добавил для примера, но их нет в jsonplaceholder
-  age?: number;
+  age?: number | null;
   role?: ERole;
 }

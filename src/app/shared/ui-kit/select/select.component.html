@@ -35,8 +35,6 @@
   [cdkConnectedOverlayOpen]="isOpen()"
   [cdkConnectedOverlayWidth]="triggerWidth()"
   [cdkConnectedOverlayPositions]="overlayPositions"
-  cdkConnectedOverlayHasBackdrop
-  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   (backdropClick)="isOpen.set(false)"
   (detach)="isOpen.set(false)"
 >

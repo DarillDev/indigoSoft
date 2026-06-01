@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { DialogRef } from '@angular/cdk/dialog';
+import { IconComponent } from '@shared/ds/icon';
 
 @Component({
   selector: 'ds-modal-container',
+  imports: [IconComponent],
   templateUrl: './modal-container.component.html',
   styleUrl: './modal-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

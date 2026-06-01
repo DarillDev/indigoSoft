@@ -26,10 +26,6 @@ export class EditUserDialogComponent {
   private readonly dialogRef = inject(DialogRef<IUser>);
   private readonly nfb = inject(FormBuilder).nonNullable;
 
-  protected get userData(): IUser {
-    return this.dialogData;
-  }
-
   protected readonly roleOptions: IDsSelectOption<ERole>[] = [
     { id: ERole.Admin, value: ERole.Admin, label: 'Admin' },
     { id: ERole.Client, value: ERole.Client, label: 'Client' },
@@ -38,18 +34,19 @@ export class EditUserDialogComponent {
   ];
 
   protected readonly form = this.nfb.group<IUserForm>({
-    name: this.nfb.control(this.userData.name, { validators: Validators.required }),
-    email: this.nfb.control(this.userData.email, {
+    name: this.nfb.control(this.dialogData.name, { validators: Validators.required }),
+    email: this.nfb.control(this.dialogData.email, {
       validators: [Validators.required, Validators.email],
     }),
-    role: this.nfb.control(this.userData.role, { validators: Validators.required }),
-    age: this.nfb.control(this.userData.age, {
+    role: this.nfb.control(this.dialogData.role, { validators: Validators.required }),
+    age: this.nfb.control(this.dialogData.age, {
       validators: [Validators.required, Validators.min(1)],
     }),
   });
 
   protected readonly canSave = toSignal(
     this.form.statusChanges.pipe(map((status) => status === 'VALID')),
+    { initialValue: this.form.valid },
   );
 
   protected submit(): void {
@@ -57,7 +54,7 @@ export class EditUserDialogComponent {
       return;
     }
 
-    this.dialogRef.close({ ...this.userData, ...this.form.getRawValue() });
+    this.dialogRef.close({ ...this.dialogData, ...this.form.getRawValue() });
   }
 
   protected close(): void {

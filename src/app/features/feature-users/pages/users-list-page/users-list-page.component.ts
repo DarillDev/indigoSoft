@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
-import { UsersService } from '@api/controllers/users';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ModalService } from '@shared/ds/modal';
@@ -10,12 +9,13 @@ import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-
 import { createDestroyer } from '@shared/utils';
 import { UsersListComponent } from 'src/app/features/shared/feature-users-list/feature-users-list.component';
 import { SearchInputComponent } from '@shared/ds/inputs/search-input';
-import { UsersListService } from './servcices/user-list/user-list.service';
+import { UsersListService } from './services/user-list/user-list.service';
 
 @Component({
   selector: 'feature-users-list-page',
   templateUrl: './users-list-page.component.html',
   styleUrl: './users-list-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [UserCardComponent, ReactiveFormsModule, UsersListComponent, SearchInputComponent],
   providers: [UsersListService],
 })

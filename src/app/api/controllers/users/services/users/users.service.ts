@@ -17,8 +17,10 @@ export class UsersService {
   }
 
   public updateUser(user: IUser): Observable<IUser> {
-    const { id, email, name, role } = user;
+    const { id, email, name, role, age } = user;
 
-    return this.usersApiService.updateUser(id, { email, name, role }).pipe(map(UserMapper.fromDto));
+    return this.usersApiService
+      .updateUser(id, { email, name, role, age })
+      .pipe(map(UserMapper.fromDto));
   }
 }

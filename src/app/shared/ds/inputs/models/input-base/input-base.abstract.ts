@@ -1,6 +1,6 @@
 import { Directive, input } from '@angular/core';
 import { TNillable } from '@shared/models';
-import { AControlValueAccessor } from 'src/app/shared/models/control-value-accessor.abstract';
+import { AControlValueAccessor } from '@shared/models';
 
 @Directive()
 export abstract class AInputBaseControl<T> extends AControlValueAccessor<T> {

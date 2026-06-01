@@ -8,10 +8,10 @@
     [isLoading]="isLoading()"
     [hasFilter]="hasFilter()"
     [itemTemplate]="cardTemplate"
-    itemSizeInPx="135"
+    [itemSizeInPx]="135"
   />
 </div>
 
 <ng-template #cardTemplate let-user>
-  <feature-user-card [user]="user" (onEditButtonClick)="editUser(user)" />
+  <feature-user-card [user]="user" (editButtonClick)="editUser(user)" />
 </ng-template>

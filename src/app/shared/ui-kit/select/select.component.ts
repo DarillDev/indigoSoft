@@ -14,6 +14,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { FORM_FIELD_CONTROL } from '@shared/ui-kit/form-field';
+
 import { AControlValueAccessor } from '../../models/control-value-accessor.abstract';
 import { SELECT_OPTION } from './config/option.token';
 import { SELECT_TRIGGER } from './config/select-trigger.token';
