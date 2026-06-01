@@ -8,6 +8,7 @@ import {
   computed,
   contentChild,
   contentChildren,
+  inject,
   input,
   model,
   signal,
@@ -21,7 +22,6 @@ import { SELECT_TRIGGER } from './config/select-trigger.token';
 import { FORM_FIELD_SELECT } from './config/select.token';
 import { ISelectOption } from './interfaces/option.interface';
 import { IFormFieldSelect } from './interfaces/select.interface';
-
 let nextSelectId = 0;
 
 @Component({
@@ -39,12 +39,13 @@ let nextSelectId = 0;
 export class SelectComponent<T> extends AControlValueAccessor<T> implements IFormFieldSelect<T> {
   public readonly value = model<T | null>(null);
 
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+
   protected readonly options = contentChildren<ISelectOption<T>>(SELECT_OPTION);
   protected readonly triggerRef = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
   protected readonly customTrigger = contentChild(SELECT_TRIGGER);
 
   protected readonly isOpen = signal(false);
-  protected readonly triggerWidth = signal(0);
   protected readonly describedBy = signal('');
 
   public readonly activeOptionId: Signal<string | null> = signal(null);
@@ -52,6 +53,20 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
   public readonly id = input(`ui-kit-select-${nextSelectId++}`);
   public readonly compareFn = input<(v1: T, v2: T) => boolean>();
   public readonly placeholder = input('');
+  public readonly overlayOrigin = input<HTMLElement | string>();
+
+  protected resolvedOverlayOrigin = computed(() => {
+    const origin = this.overlayOrigin();
+
+    if (typeof origin === 'string') {
+      return (
+        (this.elementRef.nativeElement.closest(origin) as HTMLElement | null) ??
+        this.elementRef.nativeElement
+      );
+    }
+
+    return origin ?? this.elementRef.nativeElement;
+  });
 
   public readonly isEmpty = computed(() => {
     const value = this.value();
@@ -68,8 +83,8 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
   });
 
   protected readonly overlayPositions: ConnectedPosition[] = [
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 4 },
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -4 },
+    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
+    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
   ];
 
   public override writeValue(value: T): void {
@@ -104,13 +119,6 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
   }
 
   protected toggle(): void {
-    if (!this.isOpen()) {
-      const el = this.triggerRef()?.nativeElement;
-      if (el) {
-        this.triggerWidth.set(el.offsetWidth);
-      }
-    }
-
     this.isOpen.update((v) => !v);
   }
 }

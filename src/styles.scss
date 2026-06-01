@@ -34,6 +34,10 @@ body {
 }
 
 ui-kit-form-field {
+  ui-kit-select {
+    flex: 1;
+  }
+
   input[uiKitInput] {
     flex: 1;
     min-width: 0;

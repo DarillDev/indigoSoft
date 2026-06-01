@@ -1,4 +1,4 @@
-<ui-kit-form-field>
+<ui-kit-form-field #formField>
   @if (label(); as label) {
     <label uiKitLabel [for]="id()">{{ label }}</label>
   }
@@ -9,7 +9,8 @@
     [placeholder]="placeholder()"
     [isDisabled]="isDisabled()"
     [compareFn]="compareFn()"
-    (valueChange)="handleChange($event)"
+    overlayOrigin=".ui-kit-form-field__wrapper"
+(valueChange)="handleChange($event)"
   >
     @if (triggerTemplate() ?? optionTemplate(); as template) {
       <ng-container uiKitSelectTrigger>

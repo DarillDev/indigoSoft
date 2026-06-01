@@ -1,8 +1,6 @@
 <button
   class="ui-kit-select__trigger"
   type="button"
-  cdkOverlayOrigin
-  #origin="cdkOverlayOrigin"
   #triggerBtn
   aria-haspopup="listbox"
   [attr.aria-expanded]="isOpen()"
@@ -31,9 +29,11 @@
 
 <ng-template
   cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="origin"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="resolvedOverlayOrigin()"
   [cdkConnectedOverlayOpen]="isOpen()"
-  [cdkConnectedOverlayWidth]="triggerWidth()"
+  [cdkConnectedOverlayWidth]="resolvedOverlayOrigin().offsetWidth"
   [cdkConnectedOverlayPositions]="overlayPositions"
   (backdropClick)="isOpen.set(false)"
   (detach)="isOpen.set(false)"
