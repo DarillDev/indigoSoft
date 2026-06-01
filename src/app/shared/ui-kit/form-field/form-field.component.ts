@@ -1,4 +1,4 @@
-import { Component, computed, contentChild, contentChildren, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, effect } from '@angular/core';
 import { ErrorDirective } from './directives/error/error.directive';
 import { HintDirective } from './directives/hint/hint.directive';
 import { PrefixDirective } from './directives/prefix/prefix.directive';
@@ -11,13 +11,13 @@ import { FORM_FIELD } from './config/form-field.token';
   templateUrl: './form-field.component.html',
   styleUrl: './form-field.component.scss',
   exportAs: 'formField',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: FORM_FIELD, useExisting: FormFieldComponent }],
 })
 export class FormFieldComponent {
   private readonly formField = contentChild(FORM_FIELD_CONTROL);
   private readonly errors = contentChildren(ErrorDirective);
   private readonly hints = contentChildren(HintDirective);
-
   private readonly prefix = contentChild(PrefixDirective);
   private readonly suffix = contentChild(SuffixDirective);
 

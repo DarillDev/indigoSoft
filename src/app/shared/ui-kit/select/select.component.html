@@ -2,10 +2,12 @@
   class="ui-kit-select__trigger"
   type="button"
   #triggerBtn
+  [id]="id()"
   aria-haspopup="listbox"
   [attr.aria-expanded]="isOpen()"
+  [attr.aria-invalid]="hasError() || null"
   [attr.aria-describedby]="describedBy() || null"
-  (click)="toggle()"
+  (click)="toggle($event)"
 >
   @if (customTrigger()) {
     <ng-content select="[uiKitSelectTrigger], ui-kit-select-trigger" />
@@ -38,7 +40,7 @@
   (backdropClick)="isOpen.set(false)"
   (detach)="isOpen.set(false)"
 >
-  <div class="ui-kit-select__panel">
+  <div class="ui-kit-select__panel" role="listbox">
     <ng-content />
   </div>
 </ng-template>

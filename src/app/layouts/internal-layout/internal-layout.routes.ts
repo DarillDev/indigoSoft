@@ -14,6 +14,11 @@ export const INTERNAL_LAYOUT_ROUTES: Routes = [
         path: 'posts',
         loadChildren: () => import('@features/feature-posts').then((m) => m.POSTS_ROUTES),
       },
+      {
+        path: '',
+        redirectTo: 'users',
+        pathMatch: 'full',
+      },
     ],
   },
 ];

@@ -74,6 +74,11 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
     return value === null || value === undefined;
   });
 
+  public readonly hasError = computed(() => {
+    const control = this.ngControl?.control;
+    return !!control?.invalid && (!!control.touched || !!control.dirty);
+  });
+
   protected readonly selectedLabel = computed(() => {
     return (
       this.options()
@@ -111,14 +116,16 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
   }
 
   public onContainerClick(): void {
-    this.toggle();
+    this.isOpen.set(true);
   }
 
   public setDescribedByIds(ids: string[]): void {
     this.describedBy.set(ids.join(' '));
   }
 
-  protected toggle(): void {
+  protected toggle(event: MouseEvent): void {
+    event.stopPropagation();
+
     this.isOpen.update((v) => !v);
   }
 }

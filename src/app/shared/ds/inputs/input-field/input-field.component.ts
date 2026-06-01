@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
-import { FormFieldComponent, HintDirective, ErrorDirective } from '@shared/ui-kit/form-field';
+import { FormFieldComponent, HintDirective, ErrorDirective, LabelDirective } from '@shared/ui-kit/form-field';
 import { InputDirective } from '@shared/ui-kit/input';
 import { ControlErrorTextPipe } from '@shared/ui-pipes/control-error-text';
 import { AInputBaseControl } from '../models/input-base/input-base.abstract';
@@ -14,6 +14,7 @@ let uiKitInputFieldNextId = 0;
   imports: [
     FormFieldComponent,
     InputDirective,
+    LabelDirective,
     HintDirective,
     ErrorDirective,
     ControlErrorTextPipe,
@@ -22,7 +23,7 @@ let uiKitInputFieldNextId = 0;
 export class InputFieldComponent extends AInputBaseControl<string> {
   protected readonly value = signal('');
 
-  public readonly id = input(`ui-kit-input-field-${uiKitInputFieldNextId}`);
+  public readonly id = input(`ui-kit-input-field-${uiKitInputFieldNextId++}`);
 
   public writeValue(value: string): void {
     this.value.set(value ?? '');

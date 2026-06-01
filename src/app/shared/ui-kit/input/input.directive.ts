@@ -11,6 +11,7 @@ let nextUiKitInputId = 0;
   host: {
     class: 'ui-kit-input',
     '[id]': 'id()',
+    '[attr.aria-invalid]': 'hasError() || null',
     '(input)': '_onInput()',
   },
 })
@@ -21,6 +22,12 @@ export class InputDirective<T> implements IFormFieldControl {
   public readonly id = input(`ui-kit-input-${nextUiKitInputId++}`);
   public readonly emptyStateMatcher = input<((value: T) => boolean) | undefined>(undefined);
   public readonly isDisabledInput = input(false, { alias: 'isDisabled' });
+
+  public readonly hasError = computed(() => {
+    const control = this.ngControl?.control;
+
+    return !!control?.invalid && (!!control.touched || !!control.dirty);
+  });
 
   public readonly isEmpty = computed(() => {
     const matcher = this.emptyStateMatcher() ?? this.defaultEmptyStateMatcher;

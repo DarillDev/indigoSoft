@@ -1,6 +1,6 @@
 <ui-kit-form-field>
   @if (label(); as label) {
-    <label [id]="id()">{{ label }}</label>
+    <label uiKitLabel [for]="id()">{{ label }}</label>
   }
 
   <input

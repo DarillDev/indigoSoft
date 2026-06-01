@@ -10,7 +10,7 @@
     [isDisabled]="isDisabled()"
     [compareFn]="compareFn()"
     overlayOrigin=".ui-kit-form-field__wrapper"
-(valueChange)="handleChange($event)"
+    (valueChange)="handleChange($event)"
   >
     @if (triggerTemplate() ?? optionTemplate(); as template) {
       <ng-container uiKitSelectTrigger>
