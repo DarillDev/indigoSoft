@@ -10,35 +10,34 @@ import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-
 import { createDestroyer } from '@shared/utils';
 import { UsersListComponent } from 'src/app/features/shared/feature-users-list/feature-users-list.component';
 import { SearchInputComponent } from '@shared/ds/inputs/search-input';
+import { UsersListService } from './servcices/user-list/user-list.service';
 
 @Component({
   selector: 'feature-users-list-page',
   templateUrl: './users-list-page.component.html',
   styleUrl: './users-list-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [UserCardComponent, ReactiveFormsModule, UsersListComponent, SearchInputComponent],
+  providers: [UsersListService],
 })
 export class UsersListPageComponent {
-  private readonly usersService = inject(UsersService);
+  private readonly userListService = inject(UsersListService);
   private readonly modalService = inject(ModalService);
   private readonly destroyer = createDestroyer();
 
   protected readonly searchControl = new FormControl<string>('', { nonNullable: true });
+  protected readonly searchQuery = toSignal(
+    this.searchControl.valueChanges.pipe(debounceTime(200)),
+    {
+      initialValue: '',
+    },
+  );
 
-  private readonly userList = rxResource({
-    stream: () => this.usersService.getAllUsers(),
-    defaultValue: [],
-  });
-
-  private readonly searchQuery = toSignal(this.searchControl.valueChanges.pipe(debounceTime(200)), {
-    initialValue: '',
-  });
-
+  protected readonly users = this.userListService.users;
+  protected readonly isLoading = this.userListService.isLoading;
   protected readonly hasFilter = computed(() => !!this.searchQuery());
-  protected readonly isLoading = this.userList.isLoading;
   protected readonly filteredUsers = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
-    const users = this.userList.value();
+    const users = this.userListService.users();
 
     return query ? users.filter((user) => user.name.toLowerCase().includes(query)) : users;
   });
@@ -53,18 +52,9 @@ export class UsersListPageComponent {
 
     editData$
       .pipe(
-        tap((editedUser) => {
-          this.userList.value.update((users) =>
-            (users ?? []).map((u) => (u.id === editedUser.id ? editedUser : u)),
-          );
-        }),
-        switchMap((editData) => this.usersService.updateUser(editData)),
+        switchMap((editData) => this.userListService.updateUser(editData)),
         this.destroyer(),
       )
-      .subscribe({
-        error: () => {
-          this.userList.reload();
-        },
-      });
+      .subscribe();
   }
 }

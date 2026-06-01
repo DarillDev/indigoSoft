@@ -1,4 +1,4 @@
-import { ERole } from "@shared/models";
+import { ERole } from '@shared/models';
 
 export interface IUserDto {
   id: number;

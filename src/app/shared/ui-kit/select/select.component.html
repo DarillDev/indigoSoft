@@ -12,10 +12,7 @@
   @if (customTrigger()) {
     <ng-content select="[uiKitSelectTrigger], ui-kit-select-trigger" />
   } @else {
-    <span
-      class="ui-kit-select__value"
-      [class.ui-kit-select__value--placeholder]="!selectedLabel()"
-    >
+    <span class="ui-kit-select__value" [class.ui-kit-select__value--placeholder]="!selectedLabel()">
       {{ selectedLabel() ?? placeholder() }}
     </span>
   }

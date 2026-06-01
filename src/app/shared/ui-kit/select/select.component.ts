@@ -53,17 +53,18 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
   public readonly placeholder = input('');
 
   public readonly isEmpty = computed(() => {
-    const v = this.value();
+    const value = this.value();
 
-    return v === null || v === undefined;
+    return value === null || value === undefined;
   });
 
-  protected readonly selectedLabel = computed(
-    () =>
+  protected readonly selectedLabel = computed(() => {
+    return (
       this.options()
-        .find((o) => o.selected())
-        ?.label() ?? null,
-  );
+        .find((option) => option.selected())
+        ?.label() ?? null
+    );
+  });
 
   protected readonly overlayPositions: ConnectedPosition[] = [
     { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 4 },
@@ -76,6 +77,7 @@ export class SelectComponent<T> extends AControlValueAccessor<T> implements IFor
 
   public isSelected(value: T): boolean {
     const selected = this.value();
+
     if (selected === null || selected === undefined) {
       return false;
     }

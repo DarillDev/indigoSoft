@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/types/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { NavMenuComponent } from './nav-menu.component';
 
 describe('NavMenuComponent', () => {
@@ -8,10 +9,12 @@ describe('NavMenuComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NavMenuComponent],
+      providers: [provideRouter([])],
     });
 
     fixture = TestBed.createComponent(NavMenuComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

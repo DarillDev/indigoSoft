@@ -1,7 +1,8 @@
 import { Directive, input, TemplateRef } from '@angular/core';
-import { IDsSelectOption, IDsSelectOptionContext } from '../interfaces/select-option.interface';
+import { IDsSelectOption } from '../interfaces/select-option.interface';
 import { AControlValueAccessor } from 'src/app/shared/models/control-value-accessor.abstract';
 import { TNillable } from '@shared/models';
+import { IDsSelectOptionContext } from '../interfaces/select-option-context.interface';
 
 @Directive()
 export abstract class ASelectBaseControl<T> extends AControlValueAccessor<T> {

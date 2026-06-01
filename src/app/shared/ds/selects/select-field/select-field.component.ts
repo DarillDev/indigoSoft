@@ -15,8 +15,6 @@ import {
 } from '@shared/ui-kit/form-field';
 import { OptionDirective, SelectComponent, SelectTriggerDirective } from '@shared/ui-kit/select';
 import { ControlErrorTextPipe } from '@shared/ui-pipes/control-error-text';
-import { IDsSelectOption, IDsSelectOptionContext } from '../interfaces/select-option.interface';
-import { AControlValueAccessor } from 'src/app/shared/models/control-value-accessor.abstract';
 import { ASelectBaseControl } from '../models/select-base.abstract';
 
 let uiKitSelectFieldNextId = 0;

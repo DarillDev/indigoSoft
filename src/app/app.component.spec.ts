@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { ComponentFixture, TestBed } from '@angular/core/types/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;

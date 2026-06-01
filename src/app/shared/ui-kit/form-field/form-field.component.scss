@@ -13,7 +13,9 @@
   border-radius: 8px;
   background: #fff;
   cursor: text;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 
   &:focus-within {
     border-color: #4f46e5;

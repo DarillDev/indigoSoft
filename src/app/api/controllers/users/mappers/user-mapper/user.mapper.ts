@@ -1,4 +1,4 @@
-import { ERole, IUser } from "@shared/models";
+import { ERole, IUser } from '@shared/models';
 import { IUserDto } from '../../dtos/user-dto.interface';
 
 export class UserMapper {

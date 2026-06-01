@@ -21,10 +21,7 @@
 </div>
 
 @if (hasError() || hasHint()) {
-  <div
-    class="ui-kit-form-field__hint"
-    [class.ui-kit-form-field__hint--error]="hasError()"
-  >
+  <div class="ui-kit-form-field__hint" [class.ui-kit-form-field__hint--error]="hasError()">
     @if (hasError()) {
       <ng-content select="ui-kit-error, [uiKitError]" />
     } @else {
