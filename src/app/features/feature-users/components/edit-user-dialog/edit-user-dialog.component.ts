@@ -43,7 +43,7 @@ export class EditUserDialogComponent {
       validators: [Validators.required, Validators.email],
     }),
     role: this.nfb.control(this.userData.role, { validators: Validators.required }),
-    age: this.nfb.control(this.userData.age ?? 0, {
+    age: this.nfb.control(this.userData.age, {
       validators: [Validators.required, Validators.min(1)],
     }),
   });
