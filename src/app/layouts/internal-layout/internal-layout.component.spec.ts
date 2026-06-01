@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/types/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { InternalLayoutComponent } from './internal-layout.component';
 
 describe('InternalLayoutComponent', () => {
@@ -8,6 +9,7 @@ describe('InternalLayoutComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [InternalLayoutComponent],
+      providers: [provideRouter([])],
     });
 
     fixture = TestBed.createComponent(InternalLayoutComponent);

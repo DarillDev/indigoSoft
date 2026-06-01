@@ -1,10 +1,10 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/types/testing';
 import { of, throwError } from 'rxjs';
 import { UsersService } from '@api/controllers/users';
 import { ModalService } from '@shared/ds/modal';
 import { ERole, IUser } from '@shared/models';
 import { UsersListPageComponent } from './users-list-page.component';
 import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-user-dialog.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 const MOCK_USERS: IUser[] = [
   {
@@ -62,9 +62,15 @@ describe('UsersListPageComponent', () => {
 
     fixture = TestBed.createComponent(UsersListPageComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
+    TestBed.flushEffects();
 
     usersService = TestBed.inject(UsersService) as jest.Mocked<UsersService>;
     modalService = TestBed.inject(ModalService) as jest.Mocked<ModalService>;
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   it('should create', () => {
@@ -77,9 +83,11 @@ describe('UsersListPageComponent', () => {
         expect(component['filteredUsers']()).toEqual(MOCK_USERS);
       });
 
-      it('should filter users by name (case-insensitive)', fakeAsync(() => {
+      it('should filter users by name (case-insensitive)', () => {
+        jest.useFakeTimers();
         component['searchControl'].setValue('john');
-        tick(200);
+        jest.advanceTimersByTime(200);
+        TestBed.flushEffects();
 
         const result = component['filteredUsers']();
 
@@ -87,25 +95,27 @@ describe('UsersListPageComponent', () => {
         expect(result.map((u: IUser) => u.name)).toEqual(
           expect.arrayContaining(['John Doe', 'Bob Johnson']),
         );
-      }));
+      });
 
-      it('should return empty array when no users match search', fakeAsync(() => {
+      it('should return empty array when no users match search', () => {
+        jest.useFakeTimers();
         component['searchControl'].setValue('xyz not existing');
-
-        tick(200);
+        jest.advanceTimersByTime(200);
+        TestBed.flushEffects();
 
         expect(component['filteredUsers']()).toHaveLength(0);
-      }));
+      });
 
-      it('should trim whitespace from search query before filtering', fakeAsync(() => {
+      it('should trim whitespace from search query before filtering', () => {
+        jest.useFakeTimers();
         component['searchControl'].setValue('  jane  ');
-
-        tick(200);
+        jest.advanceTimersByTime(200);
+        TestBed.flushEffects();
 
         const result = component['filteredUsers']();
         expect(result).toHaveLength(1);
         expect(result[0].name).toBe('Jane Smith');
-      }));
+      });
     });
 
     describe('hasFilter', () => {
@@ -113,12 +123,14 @@ describe('UsersListPageComponent', () => {
         expect(component['hasFilter']()).toBe(false);
       });
 
-      it('should be true when search has a value', fakeAsync(() => {
+      it('should be true when search has a value', () => {
+        jest.useFakeTimers();
         component['searchControl'].setValue('test');
-        tick(200);
+        jest.advanceTimersByTime(200);
+        TestBed.flushEffects();
 
         expect(component['hasFilter']()).toBe(true);
-      }));
+      });
     });
 
     describe('isLoading', () => {
@@ -151,6 +163,7 @@ describe('UsersListPageComponent', () => {
         usersService.updateUser.mockReturnValue(of(updatedUser));
 
         component['editUser'](user);
+        TestBed.flushEffects();
 
         const found = component['filteredUsers']().find((u: IUser) => u.id === user.id);
         expect(found?.name).toBe('John Updated');
@@ -174,6 +187,7 @@ describe('UsersListPageComponent', () => {
         usersService.updateUser.mockReturnValue(throwError(() => new Error('Update failed')));
 
         component['editUser'](user);
+        TestBed.flushEffects();
 
         expect(usersService.getAllUsers).toHaveBeenCalledTimes(2);
       });
@@ -185,6 +199,7 @@ describe('UsersListPageComponent', () => {
         usersService.updateUser.mockReturnValue(of(updatedUser));
 
         component['editUser'](userToEdit);
+        TestBed.flushEffects();
 
         const users = component['filteredUsers']();
         expect(users.find((u: IUser) => u.id === MOCK_USERS[1].id)?.name).toBe(MOCK_USERS[1].name);
