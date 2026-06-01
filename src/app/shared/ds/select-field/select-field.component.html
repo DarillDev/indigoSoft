@@ -1,0 +1,46 @@
+<ui-kit-form-field>
+  @if (label(); as label) {
+    <label uiKitLabel [for]="id()">{{ label }}</label>
+  }
+
+  <ui-kit-select
+    [id]="id()"
+    [value]="value()"
+    [placeholder]="placeholder()"
+    [isDisabled]="isDisabled()"
+    [compareFn]="compareFn()"
+    (valueChange)="handleChange($event)"
+  >
+    @if (triggerTemplate() ?? optionTemplate(); as tpl) {
+      <ng-container uiKitSelectTrigger>
+        <ng-container
+          [ngTemplateOutlet]="tpl"
+          [ngTemplateOutletContext]="{ $implicit: selectedOption() }"
+        />
+      </ng-container>
+    }
+
+    @for (option of options(); track option.id) {
+      <ui-kit-option [value]="option.value">
+        @if (optionTemplate(); as tpl) {
+          <ng-container
+            [ngTemplateOutlet]="tpl"
+            [ngTemplateOutletContext]="{ $implicit: option }"
+          />
+        } @else {
+          {{ option.label }}
+        }
+      </ui-kit-option>
+    }
+  </ui-kit-select>
+
+  @if (ngControl?.control?.errors; as errors) {
+    <span uiKitError>{{ errors | controlErrorText }}</span>
+  } @else if (error(); as err) {
+    <span uiKitError>{{ err }}</span>
+  }
+
+  @if (hint(); as hint) {
+    <span uiKitHint>{{ hint }}</span>
+  }
+</ui-kit-form-field>

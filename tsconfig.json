@@ -16,14 +16,18 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@ui-kit/*": ["src/app/shared/ui-kit/*/index.ts"],
+      "@shared/models": ["src/app/shared/models/index.ts"],
+      "@shared/utils": ["src/app/shared/utils/index.ts"],
+      "@shared/ui-kit/*": ["src/app/shared/ui-kit/*/index.ts"],
+      "@shared/ds/*": ["src/app/shared/ds/*/index.ts"],
+      "@shared/ds/inputs/*": ["src/app/shared/ds/inputs/*/index.ts"],
+      "@shared/ui-pipes/*": ["src/app/shared/ui-pipes/*/index.ts"],
       "@features/*": ["src/app/features/*/index.ts"],
       "@core": ["src/app/core/index.ts"],
       "@api/base": ["src/app/api/base/index.ts"],
       "@api/config": ["src/app/api/config/index.ts"],
       "@api/types": ["src/app/api/types/index.ts"],
-      "@api/controllers/*": ["src/app/api/controllers/*/index.ts"],
-      "@shared": ["src/app/shared/index.ts"]
+      "@api/controllers/*": ["src/app/api/controllers/*/index.ts"]
     }
   },
   "angularCompilerOptions": {

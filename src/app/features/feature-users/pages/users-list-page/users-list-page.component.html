@@ -1,0 +1,17 @@
+<div class="users-list-page">
+  <div class="users-list-page__toolbar">
+    <ds-search-input [formControl]="searchControl" placeholder="Поиск по имени" />
+  </div>
+
+  <feature-users-list
+    [users]="filteredUsers()"
+    [isLoading]="isLoading()"
+    [hasFilter]="hasFilter()"
+    [itemTemplate]="cardTemplate"
+    itemSizeInPx="200"
+  />
+</div>
+
+<ng-template #cardTemplate let-user>
+  <feature-user-card [user]="user" (onEditButtonClick)="editUser(user)" />
+</ng-template>

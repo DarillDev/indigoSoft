@@ -1,0 +1,18 @@
+<ds-modal-container title="Edit User">
+  <form class="edit-user-dialog" [formGroup]="form" (ngSubmit)="submit()">
+    <ds-input-field label="Name" placeholder="Enter name" formControlName="name" />
+    <ds-input-field label="Email" placeholder="Enter email" type="email" formControlName="email" />
+    <ds-input-field label="Age" placeholder="Set age" type="number" formControlName="age" />
+
+    <ds-select-field label="Role" placeholder="Select role" formControlName="role" [options]="roleOptions" />
+
+    <div class="edit-user-dialog__actions">
+      <button class="edit-user-dialog__btn edit-user-dialog__btn--ghost" type="button" (click)="close()">
+        Cancel
+      </button>
+      <button class="edit-user-dialog__btn" type="submit" [disabled]="!canSave()">
+        Save
+      </button>
+    </div>
+  </form>
+</ds-modal-container>

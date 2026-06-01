@@ -8,5 +8,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  protected readonly title = signal('Indigo Soft');
+  protected readonly title = signal('Hello Indigo Soft!');
 }

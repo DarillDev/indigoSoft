@@ -12,10 +12,16 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "type": "component"
+          "type": "component",
+          "standalone": true,
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:directive": {
-          "type": "directive"
+          "type": "directive",
+          "standalone": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
         }
       },
       "root": "",

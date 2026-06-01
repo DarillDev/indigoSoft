@@ -1,0 +1,24 @@
+<div class="users-list">
+  @if (isLoading()) {
+    <div class="users-list_placeholder">Загрузка...</div>
+  } @else if (!users().length && hasFilter()) {
+    <div class="users-list_placeholder">Ничего не найдено</div>
+  } @else if (!users().length) {
+    <div class="users-list_placeholder">Нет данных</div>
+  } @else {
+    <cdk-virtual-scroll-viewport [itemSize]="itemSizeInPx()" class="users-list_scroll-container">
+      <div *cdkVirtualFor="let user of users()" class="users-list_item">
+        <ng-container
+          *ngTemplateOutlet="itemTemplate() ?? defaultTemplate; context: { $implicit: user }"
+        />
+      </div>
+    </cdk-virtual-scroll-viewport>
+  }
+</div>
+
+<ng-template #defaultTemplate let-user>
+  @let userData = asUser(user);
+
+  <p>{{ userData.name }}</p>
+  <p>{{ userData.email }}</p>
+</ng-template>

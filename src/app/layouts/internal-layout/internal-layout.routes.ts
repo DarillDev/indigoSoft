@@ -8,11 +8,11 @@ export const INTERNAL_LAYOUT_ROUTES: Routes = [
     children: [
       {
         path: 'users',
-        loadChildren: () => import('@features/users').then((m) => m.USERS_ROUTES),
+        loadChildren: () => import('@features/feature-users').then((m) => m.USERS_ROUTES),
       },
       {
         path: 'posts',
-        loadChildren: () => import('@features/posts').then((m) => m.POSTS_ROUTES),
+        loadChildren: () => import('@features/feature-posts').then((m) => m.POSTS_ROUTES),
       },
     ],
   },

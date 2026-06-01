@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavMenuComponent, NavMenuItemComponent } from '@ui-kit/nav-menu';
+import { NavMenuComponent, NavMenuItemComponent } from '@shared/ds/nav-menu';
 
 @Component({
   selector: 'app-internal-sidebar',

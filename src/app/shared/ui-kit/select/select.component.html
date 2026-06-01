@@ -1,0 +1,49 @@
+<button
+  class="ui-kit-select__trigger"
+  type="button"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  #triggerBtn
+  aria-haspopup="listbox"
+  [attr.aria-expanded]="isOpen()"
+  [attr.aria-describedby]="describedBy() || null"
+  (click)="toggle()"
+>
+  @if (customTrigger()) {
+    <ng-content select="[uiKitSelectTrigger], ui-kit-select-trigger" />
+  } @else {
+    <span
+      class="ui-kit-select__value"
+      [class.ui-kit-select__value--placeholder]="!selectedLabel()"
+    >
+      {{ selectedLabel() ?? placeholder() }}
+    </span>
+  }
+  <span class="ui-kit-select__arrow" [class.ui-kit-select__arrow--open]="isOpen()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M4 6L8 10L12 6"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </span>
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayWidth]="triggerWidth()"
+  [cdkConnectedOverlayPositions]="overlayPositions"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="isOpen.set(false)"
+  (detach)="isOpen.set(false)"
+>
+  <div class="ui-kit-select__panel">
+    <ng-content />
+  </div>
+</ng-template>

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UsersApiService } from '../users-api/users-api.service';
-import { IUser } from '@shared';
+import { IUser } from "@shared/models";
 import { map, Observable } from 'rxjs';
 import { UserMapper } from '../../mappers/user-mapper/user.mapper';
 

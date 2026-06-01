@@ -11,8 +11,10 @@
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 24px;
-  overflow-y: auto;
+  overflow: hidden;
   background: #f9f9f9;
 }

@@ -1,0 +1,34 @@
+<ng-content select="ui-kit-label, [uiKitLabel]" />
+
+<div
+  class="ui-kit-form-field__wrapper"
+  [class.ui-kit-form-field__wrapper--disabled]="isDisabled()"
+  (click)="onWrapperClick($event)"
+>
+  @if (hasPrefix()) {
+    <div class="ui-kit-form-field__prefix">
+      <ng-content select="ui-kit-prefix, [uiKitPrefix]" />
+    </div>
+  }
+
+  <ng-content />
+
+  @if (hasSuffix()) {
+    <div class="ui-kit-form-field__suffix">
+      <ng-content select="ui-kit-suffix, [uiKitSuffix]" />
+    </div>
+  }
+</div>
+
+@if (hasError() || hasHint()) {
+  <div
+    class="ui-kit-form-field__hint"
+    [class.ui-kit-form-field__hint--error]="hasError()"
+  >
+    @if (hasError()) {
+      <ng-content select="ui-kit-error, [uiKitError]" />
+    } @else {
+      <ng-content select="ui-kit-hint, [uiKitHint]" />
+    }
+  </div>
+}

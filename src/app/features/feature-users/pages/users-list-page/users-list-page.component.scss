@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.users-list-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  &__toolbar {
+    flex-shrink: 0;
+    margin-bottom: 24px;
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 360px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+
+    &:focus {
+      border-color: #4f46e5;
+    }
+  }
+}

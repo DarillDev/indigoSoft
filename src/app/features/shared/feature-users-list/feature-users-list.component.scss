@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  &_scroll-container {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &_item {
+    margin-bottom: 10px;
+  }
+
+  &_placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: #999;
+  }
+}
