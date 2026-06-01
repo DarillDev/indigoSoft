@@ -7,7 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { TNillable } from '@shared/models';
 import {
   ErrorDirective,
   FormFieldComponent,
@@ -16,8 +15,9 @@ import {
 } from '@shared/ui-kit/form-field';
 import { OptionDirective, SelectComponent, SelectTriggerDirective } from '@shared/ui-kit/select';
 import { ControlErrorTextPipe } from '@shared/ui-pipes/control-error-text';
-import { AControlValueAccessor } from '../../models/control-value-accessor.abstract';
-import { IDsSelectOption, IDsSelectOptionContext } from './select-option.interface';
+import { IDsSelectOption, IDsSelectOptionContext } from '../interfaces/select-option.interface';
+import { AControlValueAccessor } from 'src/app/shared/models/control-value-accessor.abstract';
+import { ASelectBaseControl } from '../models/select-base.abstract';
 
 let uiKitSelectFieldNextId = 0;
 
@@ -38,24 +38,24 @@ let uiKitSelectFieldNextId = 0;
     OptionDirective,
   ],
 })
-export class SelectFieldComponent<T = unknown> extends AControlValueAccessor<T> {
+export class SelectFieldComponent<T = unknown> extends ASelectBaseControl<T> {
   protected readonly value = signal<T | null>(null);
 
   public readonly id = input(`ds-select-field-${uiKitSelectFieldNextId++}`);
-  public readonly label = input<string>();
-  public readonly placeholder = input('');
-  public readonly hint = input('');
-  public readonly error = input<TNillable<string>>(null);
-  public readonly options = input<IDsSelectOption<T>[]>([]);
-  public readonly optionTemplate = input<TemplateRef<IDsSelectOptionContext<T>> | null>(null);
-  public readonly triggerTemplate = input<TemplateRef<IDsSelectOptionContext<T>> | null>(null);
-  public readonly compareFn = input<(v1: T, v2: T) => boolean>();
 
   protected readonly selectedOption = computed(() => {
-    const val = this.value();
-    if (val === null || val === undefined) return null;
-    const cmp = this.compareFn();
-    return this.options().find((o) => (cmp ? cmp(o.value, val) : o.value === val)) ?? null;
+    const value = this.value();
+    if (value === null || value === undefined) {
+      return null;
+    }
+
+    const compareFn = this.compareFn();
+
+    return (
+      this.options().find((option) =>
+        compareFn ? compareFn(option.value, value) : option.value === value,
+      ) ?? null
+    );
   });
 
   public writeValue(value: T | null): void {

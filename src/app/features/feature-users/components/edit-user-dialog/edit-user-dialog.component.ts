@@ -1,16 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ERole, IUser } from '@shared/models';
 import { ModalContainerComponent } from '@shared/ds/modal';
 import { InputFieldComponent } from '@shared/ds/inputs/input-field';
-import { SelectFieldComponent, IDsSelectOption } from '@shared/ds/select-field';
+import { SelectFieldComponent, IDsSelectOption } from '@shared/ds/selects';
 import { IUserForm } from './interfaces/user-form.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';

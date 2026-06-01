@@ -11,10 +11,10 @@
     [compareFn]="compareFn()"
     (valueChange)="handleChange($event)"
   >
-    @if (triggerTemplate() ?? optionTemplate(); as tpl) {
+    @if (triggerTemplate() ?? optionTemplate(); as template) {
       <ng-container uiKitSelectTrigger>
         <ng-container
-          [ngTemplateOutlet]="tpl"
+          [ngTemplateOutlet]="template"
           [ngTemplateOutletContext]="{ $implicit: selectedOption() }"
         />
       </ng-container>
@@ -22,9 +22,9 @@
 
     @for (option of options(); track option.id) {
       <ui-kit-option [value]="option.value">
-        @if (optionTemplate(); as tpl) {
+        @if (optionTemplate(); as template) {
           <ng-container
-            [ngTemplateOutlet]="tpl"
+            [ngTemplateOutlet]="template"
             [ngTemplateOutletContext]="{ $implicit: option }"
           />
         } @else {

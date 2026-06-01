@@ -4,6 +4,6 @@ import { ERole } from '@shared/models';
 export interface IUserForm {
   name: FormControl<string>;
   email: FormControl<string>;
-  age: FormControl<number>;
+  age: FormControl<number | null>;
   role: FormControl<ERole>;
 }
