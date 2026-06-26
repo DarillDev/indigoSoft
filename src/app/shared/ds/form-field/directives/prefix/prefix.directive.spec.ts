@@ -1,14 +1,26 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { PrefixDirective } from './prefix.directive';
 
 @Component({ template: `<div dsPrefix></div>`, imports: [PrefixDirective] })
-class TestComponent {}
+class HostComponent {}
 
 describe('PrefixDirective', () => {
-  it('should create', () => {
-    const fixture = TestBed.createComponent(TestComponent);
+  let fixture: ComponentFixture<HostComponent>;
+  let directive: PrefixDirective;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ imports: [HostComponent] });
+
+    fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    expect(fixture.componentInstance).toBeTruthy();
+    directive = fixture.debugElement
+      .query(By.directive(PrefixDirective))
+      .injector.get(PrefixDirective);
+  });
+
+  it('should create', () => {
+    expect(directive).toBeTruthy();
   });
 });

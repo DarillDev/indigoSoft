@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchInputComponent } from './search-input.component';
+import { InputFieldComponent } from './input-field.component';
 
-describe('SearchInputComponent', () => {
-  let component: SearchInputComponent;
-  let fixture: ComponentFixture<SearchInputComponent>;
+describe('InputFieldComponent', () => {
+  let component: InputFieldComponent;
+  let fixture: ComponentFixture<InputFieldComponent>;
 
   function inputEvent(value: string): Event {
     const input = document.createElement('input');
@@ -12,8 +12,8 @@ describe('SearchInputComponent', () => {
   }
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [SearchInputComponent] });
-    fixture = TestBed.createComponent(SearchInputComponent);
+    TestBed.configureTestingModule({ imports: [InputFieldComponent] });
+    fixture = TestBed.createComponent(InputFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,9 +21,9 @@ describe('SearchInputComponent', () => {
   describe('Model', () => {
     describe('writeValue()', () => {
       it('should set the value signal', () => {
-        component.writeValue('shop');
+        component.writeValue('hello');
 
-        expect(component['value']()).toBe('shop');
+        expect(component['value']()).toBe('hello');
       });
 
       it('should fall back to empty string for nullish value', () => {
@@ -40,10 +40,10 @@ describe('SearchInputComponent', () => {
         component.registerOnChange(onChange);
         component.registerOnTouched(onTouched);
 
-        component.onValueChange(inputEvent('query'));
+        component.onValueChange(inputEvent('typed'));
 
         expect(onChange).toHaveBeenCalledTimes(1);
-        expect(onChange).toHaveBeenCalledWith('query');
+        expect(onChange).toHaveBeenCalledWith('typed');
         expect(onTouched).toHaveBeenCalledTimes(1);
         expect(onTouched).toHaveBeenCalledWith();
       });

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SuffixDirective } from './suffix.directive';
+import { SelectTriggerDirective } from './select-trigger.directive';
 
-@Component({ template: `<div dsSuffix></div>`, imports: [SuffixDirective] })
+@Component({ template: `<div dsSelectTrigger></div>`, imports: [SelectTriggerDirective] })
 class HostComponent {}
 
-describe('SuffixDirective', () => {
+describe('SelectTriggerDirective', () => {
   let fixture: ComponentFixture<HostComponent>;
-  let directive: SuffixDirective;
+  let directive: SelectTriggerDirective;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ imports: [HostComponent] });
@@ -16,8 +16,8 @@ describe('SuffixDirective', () => {
     fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
     directive = fixture.debugElement
-      .query(By.directive(SuffixDirective))
-      .injector.get(SuffixDirective);
+      .query(By.directive(SelectTriggerDirective))
+      .injector.get(SelectTriggerDirective);
   });
 
   it('should create', () => {

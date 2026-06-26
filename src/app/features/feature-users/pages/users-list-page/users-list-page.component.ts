@@ -4,7 +4,17 @@ import { UserCardComponent } from '../../components/user-card/user-card.componen
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ModalService } from '@shared/ds/modal';
 import { IUser } from '@shared/models';
-import { catchError, debounceTime, EMPTY, filter, Observable, switchMap, take } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  EMPTY,
+  filter,
+  map,
+  Observable,
+  switchMap,
+  take,
+} from 'rxjs';
 import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-user-dialog.component';
 import { createDestroyer } from '@shared/utils';
 import { UsersListComponent } from 'src/app/features/shared/feature-users-list/feature-users-list.component';
@@ -26,7 +36,11 @@ export class UsersListPageComponent {
 
   protected readonly searchControl = new FormControl<string>('', { nonNullable: true });
   protected readonly searchQuery = toSignal(
-    this.searchControl.valueChanges.pipe(debounceTime(200)),
+    this.searchControl.valueChanges.pipe(
+      debounceTime(200),
+      map((value) => value.trim().toLocaleLowerCase()),
+      distinctUntilChanged(),
+    ),
     {
       initialValue: '',
     },
@@ -36,7 +50,7 @@ export class UsersListPageComponent {
   protected readonly isLoading = this.userListService.isLoading;
   protected readonly hasFilter = computed(() => !!this.searchQuery());
   protected readonly filteredUsers = computed(() => {
-    const query = this.searchQuery().trim().toLowerCase();
+    const query = this.searchQuery();
     const users = this.userListService.users();
 
     return query ? users.filter((user) => user.name.toLowerCase().includes(query)) : users;
@@ -53,8 +67,6 @@ export class UsersListPageComponent {
     editData$
       .pipe(
         switchMap((editData) => this.userListService.updateUser(editData)),
-        // updateUser при ошибке перезагружает список и ре-throw'ит — здесь гасим,
-        // чтобы ошибка не всплывала как unhandled
         catchError(() => EMPTY),
         this.destroyer(),
       )

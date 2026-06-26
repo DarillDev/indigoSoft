@@ -1,14 +1,26 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { HintDirective } from './hint.directive';
 
 @Component({ template: `<div dsHint></div>`, imports: [HintDirective] })
-class TestComponent {}
+class HostComponent {}
 
 describe('HintDirective', () => {
-  it('should create', () => {
-    const fixture = TestBed.createComponent(TestComponent);
+  let fixture: ComponentFixture<HostComponent>;
+  let directive: HintDirective;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ imports: [HostComponent] });
+
+    fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
-    expect(fixture.componentInstance).toBeTruthy();
+    directive = fixture.debugElement
+      .query(By.directive(HintDirective))
+      .injector.get(HintDirective);
+  });
+
+  it('should create', () => {
+    expect(directive).toBeTruthy();
   });
 });
