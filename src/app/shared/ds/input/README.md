@@ -18,9 +18,9 @@
 | `isDisabled`       | `boolean`                    | `false`      | отключить вручную (без формы)                 |
 | `emptyStateMatcher`| `(value: T) => boolean`      | —            | переопределить логику определения пустого поля|
 
-## Как работает
+## Поведение
 
-- Регистрируется через токен `FORM_FIELD_CONTROL` — `form-field` находит его через `contentChild`.
-- Сигнал `isEmpty` используется `form-field` для управления floating-label.
-- При клике на обёртку `form-field` вызывает `onContainerClick()` → фокус на `<input>`.
-- Автоматически подхватывает `aria-describedby` от подключённых `dsError` / `dsHint`.
+- Провайдится как `FORM_FIELD_CONTROL` и реализует `IFormFieldControl`; `FormFieldComponent` получает контрол через `contentChild(FORM_FIELD_CONTROL)`.
+- Сигнал `isEmpty` используется `FormFieldComponent` для floating-label.
+- `onContainerClick()` ставит фокус на `<input>`; вызывается `FormFieldComponent` при клике по обёртке.
+- `setDescribedByIds(ids)` проставляет `aria-describedby` от подключённых `dsError` / `dsHint`.

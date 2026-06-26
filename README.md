@@ -78,7 +78,7 @@ src/app/
     │   │   └── address.interface.ts
     │   └── types/nillable.type.ts
     │
-    ├── ds/                       # Design System — готовые UI-компоненты
+    ├── ui-kit/                   # Низкоуровневые UI-примитивы
     │   ├── card/                 # Карточка-обёртка
     │   ├── icon/                 # SVG-иконки (enum IconName)
     │   ├── inputs/
@@ -94,7 +94,7 @@ src/app/
     │   │   └── modal-container/  # Обёртка-контейнер для содержимого модалки
     │   └── nav-menu/             # Навигационное меню (используется в sidebar)
     │
-    ├── ui-kit/                   # Низкоуровневые UI-примитивы (не DS-компоненты)
+    ├── ds/                       # Design System
     │   ├── form-field/           # Обёртка поля формы: label + control + error + hint
     │   │   ├── directives/       # appLabel, appError, appHint, appPrefix, appSuffix
     │   │   ├── interfaces/form-field-control.interface.ts

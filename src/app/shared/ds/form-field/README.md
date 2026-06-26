@@ -39,7 +39,11 @@
 
 ## Токены
 
-| Токен               | Что предоставляет                                    |
-|---------------------|------------------------------------------------------|
-| `FORM_FIELD`        | Ссылка на сам `FormFieldComponent` (для дочерних директив) |
-| `FORM_FIELD_CONTROL`| Контрол внутри field — реализует `IFormFieldControl` |
+`FormFieldComponent` провайдит себя как `FORM_FIELD`. Контрол в дефолтном слоте провайдится как `FORM_FIELD_CONTROL` и реализует `IFormFieldControl`; `FormFieldComponent` получает его через `contentChild(FORM_FIELD_CONTROL)`.
+
+| Токен               | Провайдер           | Контракт            | Потребитель                                  |
+|---------------------|---------------------|---------------------|----------------------------------------------|
+| `FORM_FIELD`        | `FormFieldComponent`| —                   | вложенные директивы поля                      |
+| `FORM_FIELD_CONTROL`| контрол слота       | `IFormFieldControl` | `FormFieldComponent` (`contentChild`)         |
+
+`IFormFieldControl`: `id`, `isEmpty`, `isDisabled`, `onContainerClick(event)`, `setDescribedByIds(ids)`.

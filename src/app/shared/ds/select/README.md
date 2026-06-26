@@ -52,5 +52,19 @@
 
 - Панель опций открывается через `cdkConnectedOverlay` (CDK Overlay) — позиционируется вниз или вверх в зависимости от места на экране.
 - Ширина панели совпадает с шириной `overlayOrigin` (по умолчанию — сам компонент).
-- `OptionDirective` инжектирует `FORM_FIELD_SELECT` и вызывает `select.selectOption(value)` по клику.
 - Выбранное значение синхронизируется через `model<T>()` (двустороннее связывание Angular Signals).
+
+## Токены
+
+| Токен                | Провайдер                | Контракт            | Потребитель                                   |
+|----------------------|--------------------------|---------------------|-----------------------------------------------|
+| `FORM_FIELD_CONTROL` | `SelectComponent`        | `IFormFieldControl` | `FormFieldComponent` (`contentChild`)          |
+| `FORM_FIELD_SELECT`  | `SelectComponent`        | `IFormFieldSelect`  | `OptionDirective` (`inject`)                    |
+| `SELECT_OPTION`      | `OptionDirective`        | `ISelectOption`     | `SelectComponent` (`contentChildren`)          |
+| `SELECT_TRIGGER`     | `SelectTriggerDirective` | —                   | `SelectComponent` (`contentChild`)             |
+
+- `SelectComponent` провайдится как `FORM_FIELD_CONTROL` (`IFormFieldControl`) и `FORM_FIELD_SELECT` (`IFormFieldSelect`).
+- `OptionDirective` провайдится как `SELECT_OPTION` (`ISelectOption`); инжектирует `FORM_FIELD_SELECT` и вызывает `selectOption(value)` по клику.
+- `SelectTriggerDirective` провайдится как `SELECT_TRIGGER` (токен-маркер); наличие определяет показ кастомного триггера.
+
+`IFormFieldSelect` расширяет `IFormFieldControl`: `isSelected(value)`, `selectOption(value)`, `activeOptionId`.
