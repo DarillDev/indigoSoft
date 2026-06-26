@@ -5,6 +5,7 @@ import { ERole, IUser } from '@shared/models';
 import { UsersListPageComponent } from './users-list-page.component';
 import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-user-dialog.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type MockedObject } from 'vitest';
 
 const MOCK_USERS: IUser[] = [
   {
@@ -37,8 +38,8 @@ describe('UsersListPageComponent', () => {
   let component: UsersListPageComponent;
   let fixture: ComponentFixture<UsersListPageComponent>;
 
-  let usersService: jest.Mocked<UsersService>;
-  let modalService: jest.Mocked<ModalService>;
+  let usersService: MockedObject<UsersService>;
+  let modalService: MockedObject<ModalService>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -47,14 +48,14 @@ describe('UsersListPageComponent', () => {
         {
           provide: UsersService,
           useValue: {
-            getAllUsers: jest.fn().mockReturnValue(of(MOCK_USERS)),
-            updateUser: jest.fn().mockReturnValue(of(MOCK_USERS[0])),
+            getAllUsers: vi.fn().mockReturnValue(of(MOCK_USERS)),
+            updateUser: vi.fn().mockReturnValue(of(MOCK_USERS[0])),
           },
         },
         {
           provide: ModalService,
           useValue: {
-            open: jest.fn().mockReturnValue(of(undefined)),
+            open: vi.fn().mockReturnValue(of(undefined)),
           },
         },
       ],
@@ -65,12 +66,12 @@ describe('UsersListPageComponent', () => {
     fixture.detectChanges();
     TestBed.flushEffects();
 
-    usersService = TestBed.inject(UsersService) as jest.Mocked<UsersService>;
-    modalService = TestBed.inject(ModalService) as jest.Mocked<ModalService>;
+    usersService = TestBed.inject(UsersService) as MockedObject<UsersService>;
+    modalService = TestBed.inject(ModalService) as MockedObject<ModalService>;
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('should create', () => {
@@ -78,16 +79,15 @@ describe('UsersListPageComponent', () => {
   });
 
   describe('Model', () => {
-    describe('filteredUsers', () => {
+    describe('filteredUsers()', () => {
       it('should return all users when search is empty', () => {
         expect(component['filteredUsers']()).toEqual(MOCK_USERS);
       });
 
       it('should filter users by name (case-insensitive)', () => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         component['searchControl'].setValue('john');
-        jest.advanceTimersByTime(200);
-        TestBed.flushEffects();
+        vi.advanceTimersByTime(200);
 
         const result = component['filteredUsers']();
 
@@ -98,19 +98,17 @@ describe('UsersListPageComponent', () => {
       });
 
       it('should return empty array when no users match search', () => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         component['searchControl'].setValue('xyz not existing');
-        jest.advanceTimersByTime(200);
-        TestBed.flushEffects();
+        vi.advanceTimersByTime(200);
 
         expect(component['filteredUsers']()).toHaveLength(0);
       });
 
       it('should trim whitespace from search query before filtering', () => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         component['searchControl'].setValue('  jane  ');
-        jest.advanceTimersByTime(200);
-        TestBed.flushEffects();
+        vi.advanceTimersByTime(200);
 
         const result = component['filteredUsers']();
         expect(result).toHaveLength(1);
@@ -118,28 +116,27 @@ describe('UsersListPageComponent', () => {
       });
     });
 
-    describe('hasFilter', () => {
+    describe('hasFilter()', () => {
       it('should be false when search is empty', () => {
         expect(component['hasFilter']()).toBe(false);
       });
 
       it('should be true when search has a value', () => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         component['searchControl'].setValue('test');
-        jest.advanceTimersByTime(200);
-        TestBed.flushEffects();
+        vi.advanceTimersByTime(200);
 
         expect(component['hasFilter']()).toBe(true);
       });
     });
 
-    describe('isLoading', () => {
+    describe('isLoading()', () => {
       it('should be false after users are loaded', () => {
         expect(component['isLoading']()).toBe(false);
       });
     });
 
-    describe('editUser', () => {
+    describe('editUser()', () => {
       it('should open edit dialog with the user data', () => {
         const user = MOCK_USERS[0];
 
@@ -163,7 +160,6 @@ describe('UsersListPageComponent', () => {
         usersService.updateUser.mockReturnValue(of(updatedUser));
 
         component['editUser'](user);
-        TestBed.flushEffects();
 
         const found = component['filteredUsers']().find((u: IUser) => u.id === user.id);
         expect(found?.name).toBe('John Updated');

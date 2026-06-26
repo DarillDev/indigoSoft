@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ErrorDirective,
@@ -9,6 +16,7 @@ import {
 import { OptionDirective, SelectComponent, SelectTriggerDirective } from '@shared/ui-kit/select';
 import { ControlErrorTextPipe } from '@shared/ui-pipes/control-error-text';
 import { ASelectBaseControl } from '../models/select-base.abstract';
+import { IDsSelectOptionContext } from '../interfaces/select-option-context.interface';
 
 let uiKitSelectFieldNextId = 0;
 
@@ -31,6 +39,9 @@ let uiKitSelectFieldNextId = 0;
 })
 export class SelectFieldComponent<T = unknown> extends ASelectBaseControl<T> {
   protected readonly value = signal<T | null>(null);
+
+  public readonly optionTemplate = input<TemplateRef<IDsSelectOptionContext<T>> | null>(null);
+  public readonly triggerTemplate = input<TemplateRef<IDsSelectOptionContext<T>> | null>(null);
 
   public readonly id = input(`ds-select-field-${uiKitSelectFieldNextId++}`);
 
