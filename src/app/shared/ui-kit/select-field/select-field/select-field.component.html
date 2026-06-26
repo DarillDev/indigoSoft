@@ -1,0 +1,47 @@
+<ds-form-field #formField>
+  @if (label(); as label) {
+    <label dsLabel [for]="id()">{{ label }}</label>
+  }
+
+  <ds-select
+    [id]="id()"
+    [value]="value()"
+    [placeholder]="placeholder()"
+    [isDisabled]="isDisabled()"
+    [compareFn]="compareFn()"
+    overlayOrigin=".wrapper"
+    (valueChange)="handleChange($event)"
+  >
+    @if (triggerTemplate() ?? optionTemplate(); as template) {
+      <ng-container dsSelectTrigger>
+        <ng-container
+          [ngTemplateOutlet]="template"
+          [ngTemplateOutletContext]="{ $implicit: selectedOption() }"
+        />
+      </ng-container>
+    }
+
+    @for (option of options(); track option.id) {
+      <ds-option [value]="option.value">
+        @if (optionTemplate(); as template) {
+          <ng-container
+            [ngTemplateOutlet]="template"
+            [ngTemplateOutletContext]="{ $implicit: option }"
+          />
+        } @else {
+          {{ option.label }}
+        }
+      </ds-option>
+    }
+  </ds-select>
+
+  @if (ngControl?.control?.errors; as errors) {
+    <span dsError>{{ errors | controlErrorText }}</span>
+  } @else if (error(); as err) {
+    <span dsError>{{ err }}</span>
+  }
+
+  @if (hint(); as hint) {
+    <span dsHint>{{ hint }}</span>
+  }
+</ds-form-field>

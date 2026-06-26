@@ -23,7 +23,7 @@ export class UsersListService {
   }
 
   public updateUser(updatedUser: IUser, isOptimistic: boolean = true): Observable<IUser> {
-    let request$ = this.usersService.updateUser(updatedUser);
+    const request$ = this.usersService.updateUser(updatedUser);
 
     if (!isOptimistic) {
       return request$.pipe(finalize(() => this.userListResource.reload()));

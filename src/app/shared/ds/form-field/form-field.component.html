@@ -1,0 +1,27 @@
+<ng-content select="ds-label, [dsLabel]" />
+
+<div class="wrapper" [class.disabled]="isDisabled()" (click)="onWrapperClick($event)">
+  @if (hasPrefix()) {
+    <div class="prefix">
+      <ng-content select="ds-prefix, [dsPrefix]" />
+    </div>
+  }
+
+  <ng-content />
+
+  @if (hasSuffix()) {
+    <div class="suffix">
+      <ng-content select="ds-suffix, [dsSuffix]" />
+    </div>
+  }
+</div>
+
+@if (hasError() || hasHint()) {
+  <div class="hint" [class.error]="hasError()">
+    @if (hasError()) {
+      <ng-content select="ds-error, [dsError]" />
+    } @else {
+      <ng-content select="ds-hint, [dsHint]" />
+    }
+  </div>
+}

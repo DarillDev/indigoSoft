@@ -1,10 +1,10 @@
 <ds-modal-container title="Edit User">
   <form class="edit-user-dialog" [formGroup]="form" (ngSubmit)="submit()">
-    <ds-input-field label="Name" placeholder="Enter name" formControlName="name" />
-    <ds-input-field label="Email" placeholder="Enter email" type="email" formControlName="email" />
-    <ds-input-field label="Age" placeholder="Set age" type="number" formControlName="age" />
+    <ui-input-field label="Name" placeholder="Enter name" formControlName="name" />
+    <ui-input-field label="Email" placeholder="Enter email" type="email" formControlName="email" />
+    <ui-input-field label="Age" placeholder="Set age" type="number" formControlName="age" />
 
-    <ds-select-field
+    <ui-select-field
       label="Role"
       placeholder="Select role"
       formControlName="role"

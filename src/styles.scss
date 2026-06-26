@@ -33,12 +33,14 @@ body {
   font-family: var(--font-sans);
 }
 
-ui-kit-form-field {
-  ui-kit-select {
+// Проецируемый контрол внутри ds-form-field — стилизуется глобально,
+// т.к. живёт в light-DOM потребителя (вне инкапсуляции form-field).
+ds-form-field {
+  ds-select {
     flex: 1;
   }
 
-  input[uiKitInput] {
+  input[dsInput] {
     flex: 1;
     min-width: 0;
     border: none;
@@ -56,6 +58,50 @@ ui-kit-form-field {
     &:disabled {
       color: var(--color-text-muted);
       cursor: not-allowed;
+    }
+  }
+}
+
+// Выпадающая панель ds-select рендерится CDK-overlay в <body> (вне хоста),
+// поэтому её стили и стили проецируемых ds-option — глобальные.
+.ds-select-panel {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-dropdown);
+  overflow-y: auto;
+  max-height: 240px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+ds-option {
+  display: block;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  transition: background 0.1s;
+  user-select: none;
+
+  &:hover {
+    background: var(--color-primary-light);
+  }
+
+  &.selected {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  &.disabled {
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
     }
   }
 }

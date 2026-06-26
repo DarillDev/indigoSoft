@@ -1,0 +1,46 @@
+<button
+  class="trigger"
+  type="button"
+  #triggerBtn
+  [id]="id()"
+  aria-haspopup="listbox"
+  [attr.aria-expanded]="isOpen()"
+  [attr.aria-invalid]="hasError() || null"
+  [attr.aria-describedby]="describedBy() || null"
+  (click)="toggle($event)"
+>
+  @if (customTrigger()) {
+    <ng-content select="[dsSelectTrigger], ds-select-trigger" />
+  } @else {
+    <span class="value" [class.placeholder]="!selectedLabel()">
+      {{ selectedLabel() ?? placeholder() }}
+    </span>
+  }
+  <span class="arrow" [class.open]="isOpen()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M4 6L8 10L12 6"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </span>
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="resolvedOverlayOrigin()"
+  [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayWidth]="resolvedOverlayOrigin().offsetWidth"
+  [cdkConnectedOverlayPositions]="overlayPositions"
+  (backdropClick)="isOpen.set(false)"
+  (detach)="isOpen.set(false)"
+>
+  <div class="ds-select-panel" role="listbox">
+    <ng-content />
+  </div>
+</ng-template>

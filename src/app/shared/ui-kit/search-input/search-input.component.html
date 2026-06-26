@@ -1,0 +1,20 @@
+<ds-form-field>
+  @if (label(); as label) {
+    <label [id]="id()">{{ label }}</label>
+  }
+
+  <span class="search-icon" dsPrefix>
+    <ds-icon name="search" [size]="16" />
+  </span>
+
+  <input
+    dsInput
+    [id]="id()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    (input)="onValueChange($event)"
+    (blur)="onBlur()"
+  />
+</ds-form-field>

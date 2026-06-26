@@ -28,15 +28,15 @@ module.exports = tseslint.config(
     },
   },
   {
-    files: ['src/app/shared/ui-kit/**/*.ts'],
+    files: ['src/app/shared/ds/**/*.ts'],
     rules: {
       'no-restricted-imports': [
         'error',
         {
           patterns: [
             {
-              group: ['@shared/ds/*'],
-              message: '@ui-kit must not import from @shared/ds — @shared/ds depends on @ui-kit, not the other way around.',
+              group: ['@shared/ui-kit/*'],
+              message: '@shared/ds must not import from @shared/ui-kit — @shared/ui-kit depends on @shared/ds, not the other way around.',
             },
           ],
         },

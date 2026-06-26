@@ -1,0 +1,25 @@
+<ds-form-field>
+  @if (label(); as label) {
+    <label dsLabel [for]="id()">{{ label }}</label>
+  }
+
+  <input
+    dsInput
+    class="ui-input-field"
+    [id]="id()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    (input)="onValueChange($event)"
+    (blur)="onBlur()"
+  />
+
+  @if (error() || ngControl?.control?.errors; as errors) {
+    <span dsError>{{ errors | controlErrorText }}</span>
+  }
+
+  @if (hint(); as hint) {
+    <span dsHint>{{ hint }}</span>
+  }
+</ds-form-field>

@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  outline: none;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.placeholder {
+    color: var(--color-text-muted);
+  }
+}
+
+.arrow {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  transition: transform 0.15s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}

@@ -20,7 +20,6 @@
       "@shared/utils": ["src/app/shared/utils/index.ts"],
       "@shared/ui-kit/*": ["src/app/shared/ui-kit/*/index.ts"],
       "@shared/ds/*": ["src/app/shared/ds/*/index.ts"],
-      "@shared/ds/inputs/*": ["src/app/shared/ds/inputs/*/index.ts"],
       "@shared/ui-pipes/*": ["src/app/shared/ui-pipes/*/index.ts"],
       "@features/*": ["src/app/features/*/index.ts"],
       "@core": ["src/app/core/index.ts"],

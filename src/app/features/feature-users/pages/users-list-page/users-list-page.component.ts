@@ -8,7 +8,7 @@ import { catchError, debounceTime, EMPTY, filter, Observable, switchMap, take } 
 import { EditUserDialogComponent } from '../../components/edit-user-dialog/edit-user-dialog.component';
 import { createDestroyer } from '@shared/utils';
 import { UsersListComponent } from 'src/app/features/shared/feature-users-list/feature-users-list.component';
-import { SearchInputComponent } from '@shared/ds/inputs/search-input';
+import { SearchInputComponent } from '@shared/ui-kit/search-input';
 import { UsersListService } from './services/user-list/user-list.service';
 
 @Component({
